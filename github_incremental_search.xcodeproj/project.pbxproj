@@ -13,6 +13,7 @@
 		821F9D4B1EF6DD3700BD5FD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821F9D491EF6DD3700BD5FD7 /* LaunchScreen.storyboard */; };
 		821F9D561EF6DD3700BD5FD7 /* github_incremental_searchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F9D551EF6DD3700BD5FD7 /* github_incremental_searchTests.swift */; };
 		821F9D611EF6DDA100BD5FD7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F9D601EF6DDA100BD5FD7 /* TableViewController.swift */; };
+		821F9D951EF9185C00BD5FD7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821F9D941EF9185C00BD5FD7 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		821F9D551EF6DD3700BD5FD7 /* github_incremental_searchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = github_incremental_searchTests.swift; sourceTree = "<group>"; };
 		821F9D571EF6DD3700BD5FD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		821F9D601EF6DDA100BD5FD7 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		821F9D941EF9185C00BD5FD7 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				821F9D471EF6DD3700BD5FD7 /* Assets.xcassets */,
 				821F9D491EF6DD3700BD5FD7 /* LaunchScreen.storyboard */,
 				821F9D4C1EF6DD3700BD5FD7 /* Info.plist */,
+				821F9D941EF9185C00BD5FD7 /* TableViewCell.swift */,
 			);
 			path = github_incremental_search;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				821F9D951EF9185C00BD5FD7 /* TableViewCell.swift in Sources */,
 				821F9D411EF6DD3700BD5FD7 /* AppDelegate.swift in Sources */,
 				821F9D611EF6DDA100BD5FD7 /* TableViewController.swift in Sources */,
 			);
@@ -414,6 +418,7 @@
 				821F9D5C1EF6DD3700BD5FD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		821F9D5D1EF6DD3700BD5FD7 /* Build configuration list for PBXNativeTarget "github_incremental_searchTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +427,7 @@
 				821F9D5F1EF6DD3700BD5FD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
