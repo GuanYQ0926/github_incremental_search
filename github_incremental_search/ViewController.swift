@@ -8,27 +8,48 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
 
-    let urlString = "https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000"
+    var searchURL = String() //"https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000"
     var idArray = [String]()
     var avatarURLArray = [String]()
     var addressArray = [String]()
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.downloadJsonWithURL()
-
+        //self.downloadJsonWithURL()
         // Do any additional setup after loading the view.
+        searchBar.delegate = self
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchURL = "https://api.github.com/search/users?q=\(searchText)"
+        self.idArray = [String]()
+        self.avatarURLArray = [String]()
+        self.addressArray = [String]()
+        self.downloadJsonWithURL()
+    }
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        //let keyword = String(describing: searchBar.text)
+//        let keyword = searchBar.text
+//        self.searchURL = "https://api.github.com/search/users?q=\(keyword ?? "a")"
+//        print(searchURL)
+//        self.idArray = [String]()
+//        self.avatarURLArray = [String]()
+//        self.addressArray = [String]()
+//        self.downloadJsonWithURL()
+//    }
+    
 
     func downloadJsonWithURL(){
-        let url = NSURL(string: urlString)
+        let url = NSURL(string: self.searchURL)
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
             if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary{
                 if let userArray = jsonObj!.value(forKey: "items") as? NSArray{
+                    var count = 0
                     for user in userArray{
                         if let userDict = user as? NSDictionary{
                             if let loginID = userDict.value(forKey: "login"){
@@ -42,6 +63,10 @@ class ViewController: UIViewController, UITableViewDataSource {
                             OperationQueue.main.addOperation({
                                 self.tableView.reloadData()
                             })
+                        }
+                        count += 1
+                        if count == 10{
+                            break
                         }
                     }
                 }
