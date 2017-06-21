@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +33,13 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         self.addressArray = [String]()
         self.downloadJsonWithURL()
     }
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        //let keyword = String(describing: searchBar.text)
-//        let keyword = searchBar.text
-//        self.searchURL = "https://api.github.com/search/users?q=\(keyword ?? "a")"
-//        print(searchURL)
-//        self.idArray = [String]()
-//        self.avatarURLArray = [String]()
-//        self.addressArray = [String]()
-//        self.downloadJsonWithURL()
-//    }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let indexPath = self.tableView.indexPathForSelectedRow?.row
+        let webView = segue.destination as! WebViewController
+        webView.requestURLString = addressArray[indexPath!]
+    }
+    
     func downloadJsonWithURL(){
         let url = NSURL(string: self.searchURL)
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
@@ -74,8 +70,6 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         }).resume()
     }
 
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
