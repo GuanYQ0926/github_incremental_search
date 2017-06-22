@@ -13,7 +13,9 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var avatarView: UIImageView!
     @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var starLabel: UILabel!
+    @IBOutlet weak var forkLabel: UILabel!
+    @IBOutlet weak var languageLabel: UILabel!
     
     
     override func awakeFromNib() {
