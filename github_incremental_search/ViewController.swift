@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+class ViewController: UIViewController, UITableViewDataSource {
 
-    var searchURL = String() //"https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000"
+    var searchURL = String()
     var idArray = [String]()
+    var repoNameArray = [String]()
     var avatarURLArray = [String]()
     var starArray = [Int]()
     var forkArray = [Int]()
@@ -19,18 +20,9 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     var repoURLArray = [String]()
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.downloadJsonWithURL()
-        // Do any additional setup after loading the view.
-        searchBar.delegate = self
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchURL = "https://api.github.com/search/repositories?q=\(searchText)"
         self.downloadJsonWithURL()
     }
     
@@ -45,11 +37,10 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
             if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary{
                 if let userArray = jsonObj!.value(forKey: "items") as? NSArray{
-                    
-                    
                     //reset
                     self.idArray = [String]()
                     self.avatarURLArray = [String]()
+                    self.repoNameArray = [String]()
                     self.repoURLArray = [String]()
                     self.starArray = [Int]()
                     self.forkArray = [Int]()
@@ -69,6 +60,10 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
                                         self.avatarURLArray.append(avatar as! String)
                                     }
                                 }
+                            }
+                            //repo name
+                            if let repoName = userDict.value(forKey: "name"){
+                                self.repoNameArray.append(repoName as! String)
                             }
                             //star
                             if let star = userDict.value(forKey: "stargazers_count"){
@@ -91,7 +86,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
                             })
                         }
                         count += 1
-                        if count >= 7{
+                        if count >= 30{
                             break
                         }
                     }
@@ -113,6 +108,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TableViewCell
         cell.idLabel.text = self.idArray[indexPath.row]
+        cell.repoNameLabel.text = self.repoNameArray[indexPath.row]
         cell.starLabel.text = String(self.starArray[indexPath.row])
         cell.forkLabel.text = String(self.forkArray[indexPath.row])
         cell.languageLabel.text = self.languageArray[indexPath.row]

@@ -1,24 +1,16 @@
 //
-//  TableViewCell.swift
+//  FirstTableViewCell.swift
 //  github_incremental_search
 //
-//  Created by Yuqing Guan on 2017/06/20.
+//  Created by Yuqing Guan on 2017/06/22.
 //  Copyright © 2017 Yuqing Guan. All rights reserved.
 //
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class FirstTableViewCell: UITableViewCell {
 
-    
-    @IBOutlet weak var avatarView: UIImageView!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var repoNameLabel: UILabel!
-    @IBOutlet weak var starLabel: UILabel!
-    @IBOutlet weak var forkLabel: UILabel!
-    @IBOutlet weak var languageLabel: UILabel!
-    
-    
+    @IBOutlet weak var keywordLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
